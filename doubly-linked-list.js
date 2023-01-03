@@ -35,10 +35,25 @@ class DoublyLinkedList {
     } else {
       this.tail = poppedNode.prev;
       this.tail.next = null;
+      // It is important to set poppedNode.next to null to avoid accessing other values from popped of value.
       poppedNode.prev = null;
     }
     this.length--;
     return poppedNode;
+  }
+  shift() {
+    if (this.length === 0) return undefined;
+    const tempHead = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = tempHead.next;
+      this.head.prev = null;
+      tempHead.next = null;
+    }
+    this.length--;
+    return tempHead;
   }
 }
 
