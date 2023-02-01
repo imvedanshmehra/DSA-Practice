@@ -4,22 +4,19 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    if(s.length !== t.length) {
-        return false
-    }
-    
-    let lookupObj = {}
-    
+    if(s.length !== t.length) return false;
+
+    const tempObj = {}
+
     for(let val of s) {
-        lookupObj[val] = (lookupObj[val] || 0) + 1
+        tempObj[val] = (tempObj[val] || 0) + 1;
     }
-   
-   for(let val of t) {
-       if(!lookupObj[val]){
-           return false
-       } else {
-           lookupObj[val] -= 1
-       }
-   }
-   return true
+    for(let i =0; i < t.length; i++) {
+        const letter = t[i];
+        
+        if(!tempObj[letter]) return false;
+        tempObj[letter] -= 1
+    }
+
+    return true;
 };
