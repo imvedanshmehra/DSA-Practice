@@ -3,16 +3,20 @@
  * @return {boolean}
  */
 var isPalindrome = function(x) {
-  const temp = [];
-  const temp1 = []
-  const str = String(x);
-    for(let i=0; i<str.length; i++) {
-      temp.push(str[i])
-    }
-  
-    for(let i=str.length -1; i >= 0; i--) {
-      temp1.push(str[i])
-    }
+if (x < 0 || (x % 10 === 0 && x !== 0)) return false;
 
-  return JSON.stringify(temp) === JSON.stringify(temp1)
+    const str = String(x)
+
+    let left = 0;
+    let right = str.length - 1;
+    
+    while(left < right) {
+         if(str[left] !== str[right]) return false;
+
+           right-= 1;
+           left++
+    }
+    
+return true
 };
+
