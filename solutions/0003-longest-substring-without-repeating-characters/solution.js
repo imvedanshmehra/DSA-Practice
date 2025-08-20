@@ -2,26 +2,23 @@
  * @param {string} s
  * @return {number}
  */
-const lengthOfLongestSubstring = (s) => {
-  if(!s.length) return 0;
 
-  let start = 0;
-  let end = 0;
-  let maxSum = 0;
-  let set = new Set();
-
-  while(end < s.length) {
-    if(!set.has(s[end])) {
-      set.add(s[end]);
-      end++;
-      maxSum = Math.max(maxSum, end-start)
-    } else {
-      set.delete(s[start]);
-      start++;
+var lengthOfLongestSubstring = function(s) {
+    let maxSubStr = 0
+    let tempString = ''
+    
+    if(s.length === 1 ) return 1;
+    
+    for(let char of s) {
+        const duplicateIdx = tempString.indexOf(char)
+        
+        if(duplicateIdx !== -1) {
+            tempString = tempString.slice(duplicateIdx+1)
+        }
+        
+        tempString = tempString += char
+        maxSubStr = Math.max(maxSubStr, tempString.length)
     }
-  }
-  return maxSum;
-}
-
-// test cases 
-lengthOfLongestSubstring('pwwkew')
+    
+    return maxSubStr
+};
