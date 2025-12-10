@@ -4,9 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    for(let i=0; i<nums.length; i++) {
-        for(let j=i+1; j<nums.length; j++) {
-            if(nums[i]+nums[j]=== target) return [i, j]
+    let left = 0;
+    let right = nums.length - 1;
+
+    while(left < right) {
+        for(let i = left+1; i<nums.length; i++) {
+            if(nums[left] + nums[i] === target) {
+                return [left, i]
+            }
         }
+        
+        left++;
     }
 };
