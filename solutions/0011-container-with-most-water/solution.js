@@ -5,24 +5,18 @@
 var maxArea = function(height) {
     let left = 0;
     let right = height.length - 1;
-    let maxWater = 0;
+    let area = 0;
 
     while(left < right) {
-        let leftVal = height[left];
-        let rightVal = height[right];
-        let smallPointer = Math.min(leftVal, rightVal);
+        let width = right-left;
+        area = Math.max(area, (Math.min(height[left], height[right]) * width))
 
-        // Find total water that can be stored between left & right.
-        let newMaxWater = smallPointer * (right - left)
-        maxWater = Math.max(newMaxWater, maxWater)
-
-        // Move the smallest pointer by 1
-        if(leftVal < rightVal) {
-            left++
+        if (height[left] < height[right]) {
+            left++;
         } else {
             right--;
         }
     }
 
-    return maxWater;
+    return area;
 };
