@@ -3,12 +3,18 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    const numsCount = {}
-     
-    for(let num of nums) {
-        numsCount[num] = (numsCount[num] || 0) + 1
-     }
-     
-    const majorityNum =  Object.keys(numsCount).find(count => numsCount[count] > nums.length/2)
-    return Number(majorityNum || 0)
+    let freq = new Map();
+
+    for (let num of nums) {
+        freq.set(num, (freq.get(num) || 0) + 1);
+    }
+
+    for(let key of freq.keys()) {
+        if(Math.floor(freq.get(key)) >= nums.length/2) {
+            return key;
+        }
+    }
 };
+
+
+
