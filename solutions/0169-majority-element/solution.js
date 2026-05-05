@@ -3,18 +3,31 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let freq = new Map();
+    // Boyer-Moore voting algorithm
+    if(!nums.length) return -1;
+    if(nums.length === 1) return nums[0];
 
-    for (let num of nums) {
-        freq.set(num, (freq.get(num) || 0) + 1);
-    }
+    let count = 0;
+    let candidate = -1;
 
-    for(let key of freq.keys()) {
-        if(Math.floor(freq.get(key)) >= nums.length/2) {
-            return key;
+    for (let i=0; i < nums.length; i++) {
+        if(count === 0) {
+            candidate = nums[i];
+            count++;
+        } else if(candidate === nums[i]) {
+            count++;
+        } else {
+            count--;
         }
     }
+
+    count = 0;
+
+    for(let i=0; i < nums.length; i++) {
+        if(nums[i] === candidate) {
+            count++
+        }
+    }
+
+    return count > nums.length/2 ? candidate : -1;
 };
-
-
-
